@@ -2,7 +2,7 @@ import React from 'react';
 import Signup from './components/Signup';
 import EventInput from './components/EventInput';
 import styled from 'styled-components';
-import EventList from './components/EventList';
+// import EventList from './components/EventList';
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 const MainContainer = styled.div`
@@ -21,10 +21,9 @@ const Title = styled.h1`
 function App() {
   return (
     <MainContainer >
-      <Title>Main Container</Title>
+      <Title>DreamLog</Title>
       <Signup />
       <EventInput />
-      {/* <EventList /> */}
     </MainContainer>
   );
 }

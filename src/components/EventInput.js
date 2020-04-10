@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import axios from 'axios';
 import classes from './Input.module.css';
+import Event from './Event';
 
 import "react-datepicker/dist/react-datepicker.css";
  
@@ -19,10 +20,15 @@ class EventInput extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.fetchData = this.fetchData.bind(this);
+    this.fetchData = this.fetchData.bind(this);
+    // this.setTimeout = this.setTimeout.bind(this);
+    this.update = this.update.bind(this);
+
   }
 
   componentDidMount(){
-    console.log('in componentDidMount', new Date());
+    // console.log('in componentDidMount', new Date());
     this.fetchData();
   }
 
@@ -40,6 +46,14 @@ class EventInput extends Component {
     // console.log('res.data is ', res.data)
     this.setState({ events: res.data});
   }
+
+  update(){
+    // this.setTimout(() => {
+      this.fetchData()
+    // }, 500)
+  }
+    
+  
 
   handleChange(e) {
     this.setState({[e.target.name]: e.target.value});
@@ -64,36 +78,35 @@ class EventInput extends Component {
     axios.post('http://localhost:5000/events/add', event)
       .then(res => console.log(res.data));
       this.setState({
-        descripion: '',
+        description: '',
         type: '',
         event: '',
         date: new Date()
       })
 
-      // this.setState({
-      //   events: newEvents
-      // })
-
-      // this.fetchData();
-      
-      // window.location = '/'
+    this.update()
   }
 
 
   
   render() {
 
-
     let events = this.state.events.map(e => {
       // console.log('e is', e)
-      return <li key = {e._id}> Username: {e.username} Description: {e.description} Date: {e.date} Type: {e.type}</li>
+      return <Event key={e._id} updateParent={this.update} id={e._id} description={e.description} type={e.type} event={e.event} date={e.date}  />
     })
+
+
+    // let events = this.state.events.map(e => {
+    //   // console.log('e is', e)
+    //   return <li key = {e._id}> Event: {e.event} Description: {e.description} Date: {e.date} Type: {e.type}</li>
+    // })
 
 
 
     return (
       <div className={classes.container}>
-        <h3>Create New Event</h3>
+        <h3>Edit Event</h3>
         <form onSubmit={this.handleSubmit}>
 
               <label>Event</label>

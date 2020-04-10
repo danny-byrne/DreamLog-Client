@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import classes from './Input.module.css';
+import axios from 'axios';
 
 class Event extends Component {
   constructor(props){
@@ -12,13 +13,14 @@ class Event extends Component {
       description: this.props.description,
       date: this.props.date,
       type: this.props.type,
-      id: this.props._id
+      id: this.props.id
     }
     this.delete = this.delete.bind(this);
     this.update = this.update.bind(this);
     this.capitalize = this.capitalize.bind(this);
     this.switchView = this.switchView.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.updateParent = this.updateParent.bind(this);
   }
 
   handleChange(e) {
@@ -26,11 +28,28 @@ class Event extends Component {
   }
 
   delete (id) {
+    axios.delete('http://localhost:5000/events/delete/')
+      .then(res => console.log(res))
 
+      this.updateParent();
   }
 
-  update (id) {
-    
+  update () {
+    const event = {
+      event: this.state.event,  
+      date: this.state.date,
+      description: this.state.description,
+      type: this.state.type,
+      id: this.state.id
+    }
+    axios.post('http://localhost:5000/events/update/', event)
+      .then(res => console.log(res.data))
+
+    this.updateParent();
+  }
+
+  updateParent(){
+    this.props.updateParent();
   }
 
   capitalize (input) {
@@ -38,6 +57,7 @@ class Event extends Component {
   }
 
   switchView(){
+    console.log('switching view')
     let newView = !this.state.view;
     this.setState({view: newView});
   }
@@ -45,46 +65,60 @@ class Event extends Component {
   render() {
 
     const { event, type, description, date } = this.state;
-    const params =  [event, type, description, date];
+    // const params =  [event, type, description, date];
     const { id } = this.state;
     // const look = 
 
-    let look = <div>Event:{event}Type:{type}Description:{description}Date:{date}
-                  <button oncLick = {this.switchView}>Edit</button>
-                  <button onclick={this.delete(id)}>Delete</button>
-                </div>
+    let look = ( <div>Event:{event}Type:{type}Description:{description}Date:{date}
+                  <button onClick = {this.switchView}>Edit</button>
+                  <button onClick={this.delete(id)}>Delete</button>
+                </div> )
 
     
 
-    let touch = <form onSubmit={this.update(id)}>
-                  {...params.map(e => {
-                    return (
-                      <React.Fragment>
-                      <label>{this.capitalize(e)}</label>
+    let touch = ( <form onSubmit={this.update}>
+                    <label>Event</label>
                       <input type="text"
-                            required
-                            className={classes.input} 
-                            name={this.capitalize(e)}
-                            value={this.state[e]}
-                            onChange={this.handleChange}/> 
-                      </React.Fragment> 
-                    )
-                  })}
+                        required  
+                        className={classes.input}
+                        name="event"
+                        value={this.state.event}
+                        onChange={this.handleChange}/>
 
-              <DatePicker 
-                className={classes.input}
-                selected={this.state.date}
-                required  
-                name="date"
-                onChange={date => this.setState({date: date})}/>
+                    <label>Type</label>
+                      <input type="text"
+                        required  
+                        className={classes.input}
+                        name="type"
+                        value={this.state.type}
+                        onChange={this.handleChange}/>
+                      
+                    <label>Description</label>
+                      <input type="text"
+                        required  
+                        className={classes.input}
+                        name="description"
+                        value={this.state.description}
+                        onChange={this.handleChange}/>
 
-                  <input type="submit" value="Save Event" className={classes.button} />
-              </form> ;   
+                    <label>Date </label>
+                      <DatePicker 
+                        className={classes.input}
+                        selected={Date.parse(this.state.date)}
+                        required  
+                        name="date"
+                        onChange={newDate => this.setState({date: newDate})}/>
 
-    let view = this.state.view ? look : touch;
+                      <input type="submit" value="Save Event" className={classes.button} />
+                  </form> );   
+
+    let view = !this.state.view ? look : touch;
+    // console.log('view is,', view)
 
     return (
-      {view}
+      <div>
+         {view}
+      </div>
     )
   }
 }
