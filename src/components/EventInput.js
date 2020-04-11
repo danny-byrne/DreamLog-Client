@@ -22,23 +22,18 @@ class EventInput extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fetchData = this.fetchData.bind(this);
     this.fetchData = this.fetchData.bind(this);
-    // this.setTimeout = this.setTimeout.bind(this);
     this.update = this.update.bind(this);
 
   }
 
   componentDidMount(){
-    // console.log('in componentDidMount', new Date());
     this.fetchData();
   }
 
-  componentDidUpdate(prevProps, prevState){
-    if(prevState.events !== this.state.events){
+  componentDidUpdate(){
       console.log('something changed')
-      // this.fetchData()
-    } 
-    // this.fetchData();
   }
+  
 
   async fetchData() {
     // console.log('fetching data')
@@ -48,9 +43,8 @@ class EventInput extends Component {
   }
 
   update(){
-    // this.setTimout(() => {
+      console.log('updating state from latest db')
       this.fetchData()
-    // }, 500)
   }
     
   
@@ -72,18 +66,16 @@ class EventInput extends Component {
     // let newEvents = [...this.state.events, event]
     // console.log('newEvents are', newEvents)
 
-
-    
-
     axios.post('http://localhost:5000/events/add', event)
-      .then(res => console.log(res.data));
+      .then(res => console.log(res.data))
+      .then(res => this.update())
       this.setState({
         description: '',
         type: '',
         event: '',
         date: new Date()
       })
-
+      
     this.update()
   }
 

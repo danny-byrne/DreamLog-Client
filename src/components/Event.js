@@ -27,11 +27,20 @@ class Event extends Component {
     this.setState({[e.target.name]: e.target.value});
   }
 
-  delete (id) {
-    axios.delete('http://localhost:5000/events/delete/')
-      .then(res => console.log(res))
 
-      this.updateParent();
+
+  ///working on the delete request
+
+
+  delete () {
+    console.log('deleting', this.state.id)
+    // const body = { id: this.state.id };
+    axios.delete('http://localhost:5000/events/delete', {
+      data: { id: this.state.id }
+    })
+    .then(res => console.log(res.data))
+    .then(res => this.updateParent())
+
   }
 
   update () {
@@ -65,15 +74,12 @@ class Event extends Component {
   render() {
 
     const { event, type, description, date } = this.state;
-    // const params =  [event, type, description, date];
-    const { id } = this.state;
-    // const look = 
 
     let look = ( <div>Event:{event}Type:{type}Description:{description}Date:{date}
                   <button onClick = {this.switchView}>Edit</button>
-                  <button onClick={this.delete(id)}>Delete</button>
+                  <button onClick={this.delete}>Delete</button>
                 </div> )
-
+ 
     
 
     let touch = ( <form onSubmit={this.update}>
