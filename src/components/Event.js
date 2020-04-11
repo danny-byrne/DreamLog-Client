@@ -17,7 +17,6 @@ class Event extends Component {
     }
     this.delete = this.delete.bind(this);
     this.update = this.update.bind(this);
-    this.capitalize = this.capitalize.bind(this);
     this.switchView = this.switchView.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateParent = this.updateParent.bind(this);
@@ -59,10 +58,6 @@ class Event extends Component {
 
   updateParent(){
     this.props.updateParent();
-  }
-
-  capitalize (input) {
-    return input[0].toUpperCase().concat(input.subString(1))
   }
 
   switchView(){
