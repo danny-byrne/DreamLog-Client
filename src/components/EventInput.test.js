@@ -7,8 +7,13 @@ import Event from './Event';
 configure ({adapter: new Adapter()})
 
 describe('< EventInput />', () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = shallow(<EventInput />);
+  })
+  
   it('should render no Event items if this.state.events is empty', () => {
-    const wrapper = shallow(<EventInput />);
     expect(wrapper.find(Event));
 
   })  

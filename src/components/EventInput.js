@@ -6,7 +6,6 @@ import Event from './Event';
 
 import "react-datepicker/dist/react-datepicker.css";
  
-
 class EventInput extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +22,6 @@ class EventInput extends Component {
     this.fetchData = this.fetchData.bind(this);
     this.fetchData = this.fetchData.bind(this);
     this.update = this.update.bind(this);
-
   }
 
   componentDidMount(){
@@ -36,10 +34,11 @@ class EventInput extends Component {
   
 
   async fetchData() {
-    // console.log('fetching data')
-    const res = await axios.get('http://localhost:5000/events')
-    // console.log('res.data is ', res.data)
-    this.setState({ events: res.data});
+    console.log('fetching data')
+    axios.get('http://localhost:5000/events')
+      .then(res => {
+        this.setState({ events: res.data});
+      })
   }
 
   update(){

@@ -70,8 +70,8 @@ class Event extends Component {
 
     const { event, type, description, date } = this.state;
 
-    let look = ( <div>Event:{event}Type:{type}Description:{description}Date:{date}
-                  <button onClick = {this.switchView}>Edit</button>
+    let look = ( <div className='look' >Event:{event}Type:{type}Description:{description}Date:{date}
+                  <button className='changeView' onClick = {this.switchView}>Edit</button>
                   <button onClick={this.delete}>Delete</button>
                 </div> )
  
