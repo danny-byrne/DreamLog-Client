@@ -1,25 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Signup from './components/Signup';
+import EventInput from './components/EventInput';
+import styled from 'styled-components';
+// import EventList from './components/EventList';
+// import "bootstrap/dist/css/bootstrap.min.css";
+
+const MainContainer = styled.div`
+  background-color: blue;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height 100%;
+`
+
+const Title = styled.h1`
+  width: 100%;
+  text-align: center;
+`
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MainContainer >
+      <Title>DreamLog</Title>
+      <Signup />
+      <EventInput />
+    </MainContainer>
   );
 }
 
