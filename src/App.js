@@ -52,7 +52,7 @@ class App extends React.Component  {
         <Title>DreamLog</Title>
         {/* <Signup /> */}
         <EventInput />
-        <HorizontalTimeline content={this.data} />
+        <HorizontalTimeline data={this.data} />
       </MainContainer>
     );
   }

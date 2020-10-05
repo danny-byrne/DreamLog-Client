@@ -36,7 +36,7 @@ class HorizontalTimeline extends React.Component {
     }
 
     // Convert the date strings to actual date objects
-    const dates = props.values.map((value) => new Date(value));
+    const dates = props.data.map((value) => new Date(value));
     // Calculate the distances for all events
     const distances = cummulativeSeperation(
       dates,

@@ -25,9 +25,6 @@ class Event extends Component {
   handleChange(e) {
     this.setState({[e.target.name]: e.target.value});
   }
-
-
-
   ///working on the delete request
 
 
@@ -114,7 +111,7 @@ class Event extends Component {
                   </form> );   
 
     let view = !this.state.view ? look : touch;
-    // console.log('view is,', view)
+
 
     return (
       <div>
