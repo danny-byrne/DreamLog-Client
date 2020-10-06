@@ -1,0 +1,60 @@
+$aliceBlue: E8EEF2;
+$paleSilver: D6C9C9;
+$beauBlue: C7D3DD;
+$aero: 77b6ea;
+$onyx: 37393a;
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #2a3a59;
+  min-height: 10vh;
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+  /* font-size: calc(10px + 2vmin); */
+  color: white;
+}
+
+.Posts-Container {
+  position: relative;
+  display: block;
+  background-color: #025a72;
+  min-height: 90vh;
+}
+
+.Posts-Scroll {
+  position: relative;
+  display: flex;
+  width: 100vw;
+  height: 10vh;
+  background-color: white;
+  float: top;
+}
+
+.Post-Container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 80vh;
+  background-color: red;
+}
+
+.Post {
+  margin: auto;
+  height: 500px;
+  width: 350px;
+  background-color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}

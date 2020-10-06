@@ -1,52 +1,38 @@
-import React, { Component } from "react";
+import React from "react";
 import DatePicker from "react-datepicker";
 import classes from "./Input.module.css";
 import axios from "axios";
 
-const Event = () => {
+const Event = (props) => {
   const [description, setDescription] = useState("Some Description");
   const [type, setType] = useState("Dream");
   const [event, setEvent] = useState("");
   const [date, setDate] = useState(new Date());
   const [events, setEvents] = useState([]);
   const [id, setId] = useState("");
-
-  const delete = () => {
-    console.log("deleting", id);
-    axios
-      .delete("http://localhost:5000/events/delete", {
-        data: { id: this.state.id },
-      })
-      .then((res) => console.log(res.data))
-      .then((res) => this.updateParent());
-  };
+  const [view, setView] = useState("look");
 
   const update = () => {
     const event = {
-      event: this.state.event,
-      date: this.state.date,
-      description: this.state.description,
-      type: this.state.type,
-      id: this.state.id,
+      eventnt,
+      datee,
+      description,
+      type,
+      id,
     };
     axios
       .post("http://localhost:5000/events/update/", event)
       .then((res) => console.log(res.data));
-
-    this.updateParent();
+    updateParent();
   };
 
   const updateParent = () => {
-    this.props.updateParent();
+    props.updateParent();
   };
 
   const switchView = () => {
     console.log("switching view");
-    let newView = !this.state.view;
-    this.setState({ view: newView });
   };
-
-  const { event, type, description, date } = this.state;
 
   let look = (
     <div className="look">
