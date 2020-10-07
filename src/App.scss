@@ -1,8 +1,10 @@
-$aliceBlue: E8EEF2;
-$paleSilver: D6C9C9;
-$beauBlue: C7D3DD;
-$aero: 77b6ea;
-$onyx: 37393a;
+$aliceBlue: #e8eef2;
+$paleSilver: #d6c9c9;
+$beauBlue: #c7d3dd;
+$aero: #77b6ea;
+$onyx: #37393a;
+
+$darkBlue: #2a3a59;
 
 .App {
   text-align: center;
@@ -14,7 +16,7 @@ $onyx: 37393a;
 }
 
 .App-header {
-  background-color: #2a3a59;
+  background-color: $onyx;
   min-height: 10vh;
   display: flex;
   /* flex-direction: column; */
@@ -36,7 +38,7 @@ $onyx: 37393a;
   display: flex;
   width: 100vw;
   height: 10vh;
-  background-color: white;
+  background-color: $beauBlue;
   float: top;
 }
 
@@ -45,16 +47,13 @@ $onyx: 37393a;
   display: flex;
   align-items: center;
   height: 80vh;
-  background-color: red;
+  background-color: $aero;
 }
 
 .Post {
   margin: auto;
   height: 500px;
   width: 350px;
-  background-color: white;
-}
-
-.App-link {
-  color: #61dafb;
+  background-color: $beauBlue;
+  border-radius: 20px;
 }
