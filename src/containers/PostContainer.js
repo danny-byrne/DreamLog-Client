@@ -10,6 +10,10 @@ export default function PostContainer(props) {
   const [newId, setNewId] = useState("");
   const [curView, setCurView] = useState("view");
 
+  const { post } = props;
+
+  console.log("rendering PostContainer ", post);
+
   useEffect(() => {
     console.log("re-rendering");
     return () => {
@@ -22,8 +26,6 @@ export default function PostContainer(props) {
     setNewDescription(props.post.description);
     setNewType(props.post.newType);
     setNewEvent(props.post.event);
-    setNewDescription(props.post.date);
-    setNewId(props.post.id);
     setNewDate(props.post.date);
   };
 
@@ -44,9 +46,11 @@ export default function PostContainer(props) {
       case "edit":
         setEditState();
         setCurView("edit");
+        break;
       case "new":
         createNewState();
         setCurView("new");
+        break;
       default:
         break;
     }
@@ -70,10 +74,9 @@ export default function PostContainer(props) {
   };
 
   let createView = (curView) => {
-    console.log();
     switch (curView) {
       case "view":
-        return <View post={props.post} switchView={switchView} />;
+        return <View post={post} switchView={switchView} />;
       case "edit":
         return (
           <EditNew
@@ -96,10 +99,9 @@ export default function PostContainer(props) {
       default:
         return (
           <View
-            post={props.post}
+            post={post}
             switchView={switchView}
-            delete={props.htmlHandlers.deletePost}
-            switchView={switchView}
+            htmlHandlers={props.htmlHandlers}
           />
         );
     }

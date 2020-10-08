@@ -42,17 +42,20 @@ export default function PostsContainer() {
     log("updating post", data);
     //extract id from data and put request with id and data
     //on success update within posts as well
-
     axios
       .post("http://localhost:5000/events/update/", data)
       .then((res) => console.log(res.data));
+  };
+
+  const createPost = (data) => {
+    log("creating post");
   };
 
   const setPost = (num) => {
     setCurPost(num);
   };
 
-  const htmlHandlers = { getPosts, deletePost, updatePost };
+  const htmlHandlers = { createPost, deletePost, updatePost };
 
   useEffect(() => {
     getPosts();

@@ -3,13 +3,14 @@ import classes from "./Input.module.css";
 import DatePicker from "react-datepicker";
 
 export default function EditNew(props) {
+  console.log("");
   const { createPost, updatePost, deletePost } = props.htmlHandlers;
   const { newDescription, newType, newEvent, newDate, newId } = props.post;
   const {
     setNewDescription,
     setNewType,
     setNewEvent,
-    setNewId,
+    setNewDate,
   } = props.stateHandlers;
 
   //pull in and destructure stateHandlers
@@ -28,7 +29,15 @@ export default function EditNew(props) {
 
   return (
     <>
-      <form onSubmit={curCreateMethod(props.view)}>
+      <form
+        onSubmit={curCreateMethod(props.view)({
+          newEvent,
+          newType,
+          newDescription,
+          newDate,
+          newId,
+        })}
+      >
         <label>Event</label>
         <input
           type="text"
@@ -36,7 +45,7 @@ export default function EditNew(props) {
           className={classes.input}
           name="event"
           value={newEvent}
-          onChange={this.handleChange}
+          onChange={(e) => setNewEvent(e.target.value)}
         />
 
         <label>Type</label>
@@ -46,7 +55,7 @@ export default function EditNew(props) {
           className={classes.input}
           name="type"
           value={newType}
-          onChange={this.handleChange}
+          onChange={(e) => setNewType(e.target.value)}
         />
 
         <label>Description</label>
@@ -56,7 +65,7 @@ export default function EditNew(props) {
           className={classes.input}
           name="description"
           value={newDescription}
-          onChange={this.handleChange}
+          onChange={(e) => setNewDescription(e.target.value)}
         />
 
         <label>Date </label>
@@ -65,7 +74,7 @@ export default function EditNew(props) {
           selected={Date.parse(newDate)}
           required
           name="date"
-          onChange={(newDate) => this.setState({ date: newDate })}
+          onChange={(e) => setNewDate()}
         />
 
         <input type="submit" value="Save Event" className={classes.button} />
