@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PostsScroll from "../components/PostsScroll";
 import PostContainer from "./PostContainer";
+import axios from "axios";
 
 let { log } = console;
 
@@ -41,15 +42,9 @@ export default function PostsContainer() {
     log("updating post", data);
     //extract id from data and put request with id and data
     //on success update within posts as well
-    const event = {
-      eventnt,
-      datee,
-      description,
-      type,
-      id,
-    };
+
     axios
-      .post("http://localhost:5000/events/update/", event)
+      .post("http://localhost:5000/events/update/", data)
       .then((res) => console.log(res.data));
   };
 

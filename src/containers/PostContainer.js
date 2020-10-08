@@ -1,81 +1,87 @@
 import React, { useState } from "react";
+import EditNew from "../components/EditNew";
+import View from "../components/View";
 
 export default function PostContainer(props) {
   const [newDescription, setNewDescription] = useState("");
   const [newType, setNewType] = useState("Dream");
   const [newEvent, setNewEvent] = useState("");
   const [newDate, setNewDate] = useState(new Date());
-  const [newEvents, setNewEvents] = useState([]);
   const [newId, setNewId] = useState("");
   const [newView, setNewView] = useState("look");
 
-  let look = (
-    <div className="look">
-      Event:{event}Type:{type}Description:{description}Date:{date}
-      <button className="changeView" onClick={this.switchView}>
-        Edit
-      </button>
-      <button onClick={this.delete}>Delete</button>
-    </div>
-  );
+  const setEditState = () => {
+    setNewDescription(props.description);
+    setNewType(props.newType);
+    setNewEvent(props.event);
+    setNewDescription(props.date);
+    setNewId(props.id);
+  };
 
-  let touch = (
-    <form onSubmit={this.update}>
-      <label>Event</label>
-      <input
-        type="text"
-        required
-        className={classes.input}
-        name="event"
-        value={this.state.event}
-        onChange={this.handleChange}
-      />
+  const createNewState = () => {
+    setNewDescription("");
+    setNewType("");
+    setNewEvent("");
+    setNewDescription("");
+    setNewId("");
+  };
 
-      <label>Type</label>
-      <input
-        type="text"
-        required
-        className={classes.input}
-        name="type"
-        value={this.state.type}
-        onChange={this.handleChange}
-      />
+  const switchView = (view) => {
+    switch (view) {
+      case "view":
+        setNewView("view");
+        break;
+      case "edit":
+        setEditState();
+      case "new":
+        createNewState();
+      default:
+        break;
+    }
+    setNewView(view);
+  };
 
-      <label>Description</label>
-      <input
-        type="text"
-        required
-        className={classes.input}
-        name="description"
-        value={this.state.description}
-        onChange={this.handleChange}
-      />
+  const inFields = {
+    newDescription,
+    newType,
+    newEvent,
+    newDate,
+    newId,
+    newView,
+  };
 
-      <label>Date </label>
-      <DatePicker
-        className={classes.input}
-        selected={Date.parse(this.state.date)}
-        required
-        name="date"
-        onChange={(newDate) => this.setState({ date: newDate })}
-      />
-
-      <input type="submit" value="Save Event" className={classes.button} />
-    </form>
-  );
+  const stateHandlers = {
+    setNewDescription,
+    setNewType,
+    setNewEvent,
+    setNewDescription,
+    setNewId,
+  };
 
   let createView = (view) => {
-    switch(view){
-    case 'look':
-      return look;
-
-    case 'touch':
-      return touch;
-    case 'new':
-      return new;
-    default:
-      return look
-  }
+    switch (view) {
+      case "look":
+        return <View post={props.post} switchView={switchView} />;
+      case "touch":
+        return (
+          <EditNew
+            post={inFields}
+            switchView={switchView}
+            stateHandlers={stateHandlers}
+          />
+        );
+      case "new":
+        return (
+          <EditNew
+            post={inFields}
+            switchView={switchView}
+            stateHandlers={stateHandlers}
+          />
+        );
+      default:
+        return <View post={props.post} switchView={switchView} />;
+    }
+  };
 
   return (
     <div className="Post-Container">

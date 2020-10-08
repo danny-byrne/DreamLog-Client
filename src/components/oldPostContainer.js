@@ -9,25 +9,19 @@ const Event = (props) => {
   const [event, setEvent] = useState("");
   const [date, setDate] = useState(new Date());
   const [events, setEvents] = useState([]);
-  const [id, setId] = useState("");
   const [view, setView] = useState("look");
 
   const update = () => {
-    const event = {
-      eventnt,
-      datee,
-      description,
-      type,
-      id,
-    };
-    axios
-      .post("http://localhost:5000/events/update/", event)
-      .then((res) => console.log(res.data));
-    updateParent();
-  };
-
-  const updateParent = () => {
-    props.updateParent();
+    // const event = {
+    //   event,
+    //   datee,
+    //   description,
+    //   type,
+    //   id,
+    // };
+    // axios
+    //   .post("http://localhost:5000/events/update/", event)
+    //   .then((res) => console.log(res.data));
   };
 
   const switchView = () => {
@@ -43,6 +37,13 @@ const Event = (props) => {
       <button onClick={this.delete}>Delete</button>
     </div>
   );
+
+  //abstract component
+  //if view is look, return component with props.post
+  //if view is touch, load post params into state return component inputs with props.post params.
+  //if view is new, load blank form and render touch component with state props
+
+  //if view is new,
 
   let touch = (
     <form onSubmit={this.update}>
@@ -88,8 +89,6 @@ const Event = (props) => {
       <input type="submit" value="Save Event" className={classes.button} />
     </form>
   );
-
-  let view = !this.state.view ? look : touch;
 
   return <div>{view}</div>;
 };
