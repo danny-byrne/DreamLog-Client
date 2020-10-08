@@ -23,7 +23,7 @@ const dummyPosts = [
 ];
 
 export default function PostsContainer() {
-  const [posts, setPosts] = useState([...dummyPosts]);
+  const [posts, setPosts] = useState(dummyPosts);
   const [curPost, setCurPost] = useState(0);
 
   const getPosts = () => {
@@ -52,7 +52,7 @@ export default function PostsContainer() {
     setCurPost(num);
   };
 
-  const handlers = { getPosts, deletePost, updatePost };
+  const htmlHandlers = { getPosts, deletePost, updatePost };
 
   useEffect(() => {
     getPosts();
@@ -61,7 +61,7 @@ export default function PostsContainer() {
   return (
     <div className="Posts-Container">
       <PostsScroll posts={posts} setPost={setPost} />
-      <PostContainer handlers={handlers} post={posts[curPost]} />
+      <PostContainer htmlHandlers={htmlHandlers} post={posts[curPost]} />
     </div>
   );
 }

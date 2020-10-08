@@ -8,7 +8,7 @@ export default function View(props) {
       <button className="changeView" onClick={() => props.switchView("edit")}>
         Edit
       </button>
-      <button onClick={this.delete}>Delete</button>
+      <button onClick={props.delete}>Delete</button>
     </div>
   );
 }
