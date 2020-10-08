@@ -41,6 +41,16 @@ export default function PostsContainer() {
     log("updating post", data);
     //extract id from data and put request with id and data
     //on success update within posts as well
+    const event = {
+      eventnt,
+      datee,
+      description,
+      type,
+      id,
+    };
+    axios
+      .post("http://localhost:5000/events/update/", event)
+      .then((res) => console.log(res.data));
   };
 
   const setPost = (num) => {
