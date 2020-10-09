@@ -7,7 +7,13 @@ $onyx: #37393a;
 $darkBlue: #2a3a59;
 
 .App {
-  text-align: center;
+  // text-align: center;
+}
+
+h1 {
+  float: right;
+  margin: 20px;
+  margin-bottom: 5px;
 }
 
 .App-logo {
@@ -18,9 +24,9 @@ $darkBlue: #2a3a59;
 .App-header {
   background-color: $onyx;
   min-height: 10vh;
-  display: flex;
+  // display: flex;
   /* flex-direction: column; */
-  align-items: center;
+  // align-items: center;
   justify-content: center;
   /* font-size: calc(10px + 2vmin); */
   color: white;
@@ -54,7 +60,7 @@ $darkBlue: #2a3a59;
 .Post {
   margin: auto;
   height: 500px;
-  width: 350px;
+  width: 800px;
   background-color: $beauBlue;
   border-radius: 20px;
 }

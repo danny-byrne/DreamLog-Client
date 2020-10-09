@@ -19,13 +19,13 @@ export default function PostContainer(props) {
     return () => {
       // cleanup;
     };
-  }, []);
+  });
 
   const setEditState = () => {
-    console.log("setting edit state ", props.post);
+    console.log("setting edit state ");
     setNewDescription(props.post.description);
-    setNewType(props.post.newType);
-    setNewEvent(props.post.event);
+    setNewType(props.post.type);
+    setNewEvent(props.post.body);
     setNewDate(props.post.date);
   };
 
@@ -93,7 +93,7 @@ export default function PostContainer(props) {
             post={inFields}
             switchView={switchView}
             stateHandlers={stateHandlers}
-            htmlHandlers={props.htmlHandlers}
+            // htmlHandlers={props.htmlHandlers}
           />
         );
       default:
