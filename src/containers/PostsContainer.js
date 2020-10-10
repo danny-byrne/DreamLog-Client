@@ -3,8 +3,6 @@ import PostsScroll from "../components/PostsScroll";
 import PostContainer from "./PostContainer";
 import axios from "axios";
 
-let { log } = console;
-
 const dummyPosts = [
   {
     description: "The Fountain",
@@ -25,32 +23,47 @@ const dummyPosts = [
 ];
 
 export default function PostsContainer() {
-  const [posts, setPosts] = useState(dummyPosts);
+  const [posts, setPosts] = useState([]);
   const [curPost, setCurPost] = useState(0);
+  const [error, setError] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    // getPosts();
+    console.log("in useEffect, setting posts", dummyPosts);
+    setPosts(dummyPosts);
+  }, []);
 
   const getPosts = () => {
-    log("fetching posts");
+    console.log("fetching posts");
     //async call to firebase
     //on res, parse response and setPosts(res.data)
   };
 
   const deletePost = (id) => {
-    log("deleting post ", id);
+    console.log("deleting post ", id);
     //delete request with id
     //on success go through posts and delete corresponding post with id property
   };
 
   const updatePost = (data) => {
-    log("updating post", data);
+    console.log("updating post", data);
+    let newPosts = [...posts];
+    for (let i = 0; i < newPosts.length; i++) {
+      if (data.id === newPosts.id) {
+        newPosts[i] = data;
+      }
+    }
+    setPosts(newPosts);
     //extract id from data and put request with id and data
     //on success update within posts as well
-    axios
-      .post("http://localhost:5000/events/update/", data)
-      .then((res) => console.log(res.data));
+    // axios
+    //   .post("http://localhost:5000/events/update/", data)
+    //   .then((res) => console.log(res.data));
   };
 
   const createPost = (data) => {
-    log("creating post");
+    console.log("creating post");
   };
 
   const setPost = (num) => {
@@ -59,14 +72,23 @@ export default function PostsContainer() {
 
   const htmlHandlers = { createPost, deletePost, updatePost };
 
-  useEffect(() => {
-    getPosts();
-  }, []);
-
-  return (
-    <div className="Posts-Container">
-      <PostsScroll posts={posts} setPost={setPost} />
-      <PostContainer htmlHandlers={htmlHandlers} post={posts[curPost]} />
-    </div>
+  let loader = (
+    <>
+      <span>Loading</span>
+    </>
   );
+
+  let content =
+    posts > 0 ? (
+      <div className="Posts-Container">
+        <PostsScroll posts={posts} setPost={setPost} />
+        <PostContainer htmlHandlers={htmlHandlers} post={posts[curPost]} />
+      </div>
+    ) : (
+      loader
+    );
+
+  // console.log("content is", content);
+
+  return content;
 }

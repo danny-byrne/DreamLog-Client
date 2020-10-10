@@ -30,15 +30,14 @@ export default function EditNew(props) {
   return (
     <>
       <form
-        onSubmit={
-          () => console.log("submitting")
-          //   curCreateMethod(props.view)({
-          //   newEvent,
-          //   newType,
-          //   newDescription,
-          //   newDate,
-          //   newId,
-          // })
+        onSubmit={() =>
+          updatePost({
+            newEvent,
+            newType,
+            newDescription,
+            newDate,
+            newId,
+          })
         }
       >
         <header className={classes.header}>
