@@ -6,7 +6,8 @@ import PostsContainer from "./containers/PostsContainer";
 // import dummyData from "./resources/content";
 
 const App = () => {
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
+  console.log("loading App");
 
   return (
     <div className="App-Container">

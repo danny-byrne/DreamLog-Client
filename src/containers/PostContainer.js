@@ -10,12 +10,8 @@ export default function PostContainer(props) {
   const [newId, setNewId] = useState("");
   const [curView, setCurView] = useState("view");
 
-  const { post } = props;
-
-  console.log("rendering PostContainer ", post);
-
   useEffect(() => {
-    console.log("re-rendering");
+    console.log("re-rendering Post Container");
     return () => {
       // cleanup;
     };
@@ -27,6 +23,7 @@ export default function PostContainer(props) {
     setNewType(props.post.type);
     setNewEvent(props.post.body);
     setNewDate(props.post.date);
+    setNewId(props.post.id);
   };
 
   const createNewState = () => {
@@ -34,7 +31,7 @@ export default function PostContainer(props) {
     setNewType("");
     setNewEvent("");
     setNewDescription("");
-    setNewId("");
+    setNewId(null);
   };
 
   const switchView = (view) => {
@@ -69,21 +66,27 @@ export default function PostContainer(props) {
     setNewDescription,
     setNewType,
     setNewEvent,
-    setNewId,
     setNewDate,
+  };
+
+  const updatePost = (data) => {
+    // console.log("inside PostContainer, updating post");
+    props.htmlHandlers.updatePost(data);
+    switchView("view");
   };
 
   let createView = (curView) => {
     switch (curView) {
       case "view":
-        return <View post={post} switchView={switchView} />;
+        return <View post={props.post} switchView={switchView} />;
       case "edit":
         return (
           <EditNew
             post={inFields}
             switchView={switchView}
             stateHandlers={stateHandlers}
-            htmlHandlers={props.htmlHandlers}
+            // updatePost={updatePost}
+            updatePost={updatePost}
             view={curView}
           />
         );
@@ -99,7 +102,7 @@ export default function PostContainer(props) {
       default:
         return (
           <View
-            post={post}
+            post={props.post}
             switchView={switchView}
             htmlHandlers={props.htmlHandlers}
           />

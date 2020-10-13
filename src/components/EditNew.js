@@ -3,8 +3,6 @@ import classes from "./Input.module.scss";
 import DatePicker from "react-datepicker";
 
 export default function EditNew(props) {
-  console.log("in EditNew props.post is", props.post);
-  const { createPost, updatePost, deletePost } = props.htmlHandlers;
   const { newDescription, newType, newEvent, newDate, newId } = props.post;
   const {
     setNewDescription,
@@ -12,33 +10,16 @@ export default function EditNew(props) {
     setNewEvent,
     setNewDate,
   } = props.stateHandlers;
-
-  // pull in and destructure stateHandlers
-  // if new pass createPost to onSubmit
-  // if edit updatePost
-  let curCreateMethod = (view) => {
-    switch (view) {
-      case "edit":
-        return updatePost;
-      case "new":
-        return createPost;
-      default:
-        break;
-    }
-  };
+  const { updatePost } = props;
+  // console.log("in EditNew post is", props.post);
 
   return (
     <>
       <form
-        onSubmit={() =>
-          updatePost({
-            newEvent,
-            newType,
-            newDescription,
-            newDate,
-            newId,
-          })
-        }
+        onSubmit={() => {
+          console.log("updating event", props.post);
+          updatePost(props.post);
+        }}
       >
         <header className={classes.header}>
           <div className={classes.subHeader}>
