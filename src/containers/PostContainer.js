@@ -11,7 +11,7 @@ export default function PostContainer(props) {
   const [curView, setCurView] = useState("view");
 
   useEffect(() => {
-    console.log("re-rendering Post Container");
+    // console.log("re-rendering Post Container");
     return () => {
       // cleanup;
     };
@@ -112,6 +112,9 @@ export default function PostContainer(props) {
 
   return (
     <div className="Post-Container">
+      <button className="newButton" onClick={() => switchView("new")}>
+        New Post
+      </button>
       <div className="Post">{createView(curView)}</div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.scss";
 import PostsContainer from "./containers/PostsContainer";
 
@@ -7,7 +7,7 @@ import PostsContainer from "./containers/PostsContainer";
 
 const App = () => {
   // const [data, setData] = useState([]);
-  console.log("loading App");
+  // console.log("loading App");
 
   return (
     <div className="App-Container">

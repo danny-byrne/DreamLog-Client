@@ -28,7 +28,7 @@ export default function PostsContainer() {
 
   useEffect(() => {
     // getPosts();
-    console.log("in useEffect, setting posts", dummyPosts);
+    // console.log("in useEffect, setting posts", dummyPosts);
     setPosts(dummyPosts);
   }, []);
 
@@ -44,6 +44,12 @@ export default function PostsContainer() {
     //on success go through posts and delete corresponding post with id property
   };
 
+  const createPost = (data) => {
+    console.log("creating post", data);
+    //make post request to firebase db
+    //on success, update posts with res.data
+  };
+
   const updatePost = (data) => {
     const newData = {
       description: data.newDescription,
@@ -52,25 +58,24 @@ export default function PostsContainer() {
       id: data.newId,
       date: data.newDate,
     };
-    console.log("updating post", newData);
-    let newPosts = [...posts];
-    for (let i = 0; i < newPosts.length; i++) {
-      if (newPosts[i].id === newData.id) {
-        newPosts[i] = newData;
-      }
-    }
-    console.log("updated,", newPosts);
 
-    setPosts(newPosts);
+    if (newData.id === null) {
+      createPost(newData);
+    } else {
+      let newPosts = [...posts];
+      for (let i = 0; i < newPosts.length; i++) {
+        if (newPosts[i].id === newData.id) {
+          newPosts[i] = newData;
+        }
+      }
+      setPosts(newPosts);
+    }
+    // console.log("updating post", newData);
     //extract id from data and put request with id and data
     //on success update within posts as well
     // axios
     //   .post("http://localhost:5000/events/update/", data)
     //   .then((res) => console.log(res.data));
-  };
-
-  const createPost = (data) => {
-    console.log("creating post");
   };
 
   const setPost = (num) => {
@@ -94,8 +99,6 @@ export default function PostsContainer() {
     ) : (
       loader
     );
-
-  // console.log("content is", content);
 
   return content;
 }
